@@ -85,3 +85,7 @@ python app.py
 
 # 6. Make an existing user an admin
 python set_admin.py
+
+### 7. Database Reset (Clean Start)
+If you want to clear all users and logs, simply run the reset script:
+python reset_database.py
