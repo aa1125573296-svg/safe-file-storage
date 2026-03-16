@@ -277,7 +277,6 @@ def delete_user(user_id):
 @login_required
 @admin_required
 def admin_users():
-    # Bütün istifadəçiləri bazadan çəkirik
     rows = query_all("SELECT id, username, email, role FROM users ORDER BY id DESC")
     return render_template("admin_users.html", users=rows)
 
