@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-body p-4">
+    <h4 class="mb-2">{{ file.original_name }}</h4>
+    <div class="text-muted small mb-3">SHA-256: {{ file.sha256 }}</div>
+
+    <div class="mb-3">
+      <span class="badge text-bg-secondary">VT: {{ file.vt_status }}</span>
+      {% if file.vt_status == "ok" %}
+        <span class="badge text-bg-danger">malicious: {{ file.vt_malicious }}</span>
+        <span class="badge text-bg-warning">suspicious: {{ file.vt_suspicious }}</span>
+        <span class="badge text-bg-success">harmless: {{ file.vt_harmless }}</span>
+        <span class="badge text-bg-light text-dark">undetected: {{ file.vt_undetected }}</span>
+      {% endif %}
+    </div>
+
+    <hr>
+
+    <form class="row g-2" method="post" action="{{ url_for('file_download', file_id=file.id) }}">
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      <div class="col-md-8">
+        <input class="form-control" type="password" name="dec_password" placeholder="Decryption password" required minlength="6">
+      </div>
+      <div class="col-md-4 d-grid">
+        <button class="btn btn-success">Decrypt + Download</button>
+      </div>
+    </form>
+
+    <form class="mt-3" method="post" action="{{ url_for('file_delete', file_id=file.id) }}"
+          onsubmit="return confirm('Delete this file?');">
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      <button class="btn btn-outline-danger">Delete</button>
+      <a class="btn btn-outline-secondary" href="{{ url_for('dashboard') }}">Back</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

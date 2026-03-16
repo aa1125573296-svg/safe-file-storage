@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h4 class="mb-4">Cyber Threat Intelligence (CTI)</h4>
+
+<div class="row mb-4">
+  <div class="col-md-3">
+    <div class="card border-success text-center">
+      <div class="card-body">
+        <h6 class="card-title">LOW Risk</h6>
+        <p class="display-6">{{ risks["LOW"] }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card border-secondary text-center">
+      <div class="card-body">
+        <h6 class="card-title">UNKNOWN Risk</h6>
+        <p class="display-6">{{ risks["UNKNOWN"] }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card border-warning text-center">
+      <div class="card-body">
+        <h6 class="card-title">MEDIUM Risk</h6>
+        <p class="display-6">{{ risks["MEDIUM"] }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="card border-danger text-center">
+      <div class="card-body">
+        <h6 class="card-title">HIGH Risk (Stored)</h6>
+        <p class="display-6">{{ risks["HIGH"] }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<div class="row mb-4">
+  <div class="col-md-4">
+    <div class="card border-danger text-center">
+      <div class="card-body">
+        <h6 class="card-title">Blocked Upload Attempts</h6>
+        <p class="display-6">{{ blocked_count }}</p>
+        <small class="text-muted">Malicious file attempts</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="my-4">
+
+<h5 class="mb-3">Risk Distribution</h5>
+
+<div style="max-width: 380px; margin: auto;">
+  <canvas id="riskChart"
+          height="200"
+          data-risk='{{ risks | tojson }}'>
+  </canvas>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const canvas = document.getElementById("riskChart");
+  const riskData = JSON.parse(canvas.dataset.risk);
+
+  const ctx = canvas.getContext("2d");
+
+  new Chart(ctx, {
+      type: "pie",
+      data: {
+          labels: ["LOW", "UNKNOWN", "MEDIUM", "HIGH"],
+          datasets: [{
+              data: [
+                  riskData.LOW,
+                  riskData.UNKNOWN,
+                  riskData.MEDIUM,
+                  riskData.HIGH
+              ],
+              backgroundColor: [
+                  "#198754",
+                  "#6c757d",
+                  "#ffc107",
+                  "#dc3545"
+              ]
+          }]
+      },
+      options: {
+          plugins: {
+              legend: {
+                  position: "bottom"
+              }
+          }
+      }
+  });
+</script>
+
+<hr>
+
+<h6>Explanation of Risk Levels</h6>
+<ul class="small">
+  <li><b>HIGH</b> – Malicious or suspicious behavior detected</li>
+  <li><b>MEDIUM</b> – Suspicious indicators present</li>
+  <li><b>UNKNOWN</b> – New files with no reputation</li>
+  <li><b>LOW</b> – Low risk or safe</li>
+</ul>
+
+{% endblock %}

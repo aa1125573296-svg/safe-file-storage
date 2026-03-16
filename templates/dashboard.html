@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h4 class="mb-0">My Files</h4>
+  <a class="btn btn-primary" href="{{ url_for('upload') }}">+ New Upload</a>
+</div>
+
+{% if not files %}
+  <div class="alert alert-info">No files yet.</div>
+{% else %}
+  <div class="card shadow-sm">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0 align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>SHA-256</th>
+            <th>VT</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for f in files %}
+          <tr>
+            <td class="fw-semibold">{{ f.original_name }}</td>
+            <td>{{ (f.size_bytes / 1024) | round(1) }} KB</td>
+            <td class="text-muted small">{{ f.sha256[:16] }}...</td>
+            <td>
+              <span class="badge text-bg-secondary">{{ f.vt_status }}</span>
+              {% if f.vt_status == "ok" %}
+                <span class="badge text-bg-danger">mal: {{ f.vt_malicious }}</span>
+                <span class="badge text-bg-warning">sus: {{ f.vt_suspicious }}</span>
+              {% endif %}
+            </td>
+            <td class="small text-muted">{{ f.created_at }}</td>
+            <td class="text-end">
+              <a class="btn btn-sm btn-outline-dark" href="{{ url_for('file_view', file_id=f.id) }}">View</a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}

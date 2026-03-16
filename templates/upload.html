@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <h4 class="mb-3">Upload and Encrypt File</h4>
+        <form method="post" enctype="multipart/form-data">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+          <div class="mb-3">
+            <label class="form-label">File</label>
+            <input class="form-control" type="file" name="file" required>
+            <div class="form-text">
+              Allowed types: {{ config.ALLOWED_EXTENSIONS if config else "pdf,png,jpg,jpeg,docx,txt,zip" }}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Encryption Password</label>
+            <input class="form-control" type="password" name="enc_password" required minlength="6">
+            <div class="form-text">The server does not store this password. The same password is needed for decryption.</div>
+          </div>
+
+          <button class="btn btn-primary w-100">Upload + Encrypt</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

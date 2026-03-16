@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>Admin – All Audit Logs</h4>
+<div class="card">
+<table class="table table-sm table-hover">
+<thead>
+<tr>
+  <th>User</th>
+  <th>Action</th>
+  <th>Details</th>
+  <th>IP</th>
+  <th>Time</th>
+  <th>Manage</th> </tr>
+</thead>
+<tbody>
+{% for l in logs %}
+<tr>
+  <td>{{ l.username or "system" }}</td>
+  <td>{{ l.action }}</td>
+  <td class="small">{{ l.details }}</td>
+  <td>{{ l.ip }}</td>
+  <td class="small">{{ l.created_at }}</td>
+  <td>
+    <form action="{{ url_for('delete_log', log_id=l.id) }}" method="POST" style="display:inline;">
+      <button type="submit" class="btn btn-outline-danger btn-sm" style="padding: 0px 5px; font-size: 10px;" onclick="return confirm('Silinsin?')">
+        Delete
+      </button>
+    </form>
+  </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}

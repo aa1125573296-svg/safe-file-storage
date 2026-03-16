@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>Admin – All Files</h4>
+<div class="card">
+<table class="table table-hover">
+<thead>
+<tr>
+  <th>User</th>
+  <th>File</th>
+  <th>SHA256</th>
+  <th>VT</th>
+  <th>Date</th>
+</tr>
+</thead>
+<tbody>
+{% for f in files %}
+<tr>
+  <td>{{ f.username }}</td>
+  <td>{{ f.original_name }}</td>
+  <td class="small">{{ f.sha256[:16] }}...</td>
+  <td>{{ f.vt_status }}</td>
+  <td>{{ f.created_at }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% endblock %}
