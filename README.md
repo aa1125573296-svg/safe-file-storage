@@ -64,8 +64,8 @@ A VirusTotal API Key (Free or Premium)
 2. Step-by-Step Installation
 Bash
 # 1. Clone the repository
-git clone [https://github.com/ravanorucov/SafeFileBox.git](https://github.com/ravanorucov/SafeFileBox.git)
-cd SafeFileBox
+git clone [https://github.com/ravanorucov/safe-file-storage.git](https://github.com/ravanorucov/safe-file-storage.git)
+cd safe-file-storage
 
 # 2. Create and activate a virtual environment
 python -m venv venv
